@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Counter.MainPage"
+             xmlns:controls="clr-namespace:Counter.Controls"
+            xmlns:ViewModels="clr-namespace:Counter"
+             x:DataType="ViewModels:MainPageViewModel"
+             Title="Damn good counter.">
+
+    <ContentPage.BindingContext>
+        <ViewModels:MainPageViewModel/>
+    </ContentPage.BindingContext>
+    <VerticalStackLayout>
+        <Label Text="Add Count'a" TextColor="LightBlue" FontSize="Title" HeightRequest="60" HorizontalOptions="Center"></Label>
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <VerticalStackLayout >
+                
+                <Entry
+                Text="{Binding Name}"
+                WidthRequest="120"
+                Placeholder="Counter name"
+                ReturnCommand="{Binding NewCounterCommand}"
+                    Margin="0,0,0,10"/>
+                
+                <Entry
+                MaxLength="12"
+                Text="{Binding InitNumber}"
+                WidthRequest="120"
+                Placeholder="Initial value"
+                Keyboard="Numeric" 
+                ReturnCommand="{Binding NewCounterCommand}"/>
+                
+            </VerticalStackLayout>
+            <ImageButton
+                Command="{Binding NewCounterCommand}"
+                Source="add.ico"></ImageButton>
+        </HorizontalStackLayout>
+
+        <CollectionView x:Name="countersCollection"
+                    ItemsSource="{Binding AllCounters}"
+                    Margin="20"
+                    SelectionMode="None">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout  Orientation="Vertical" Span="7" HorizontalItemSpacing="5" VerticalItemSpacing="5" >
+                </GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate >
+                    <controls:CounterView>
+                    </controls:CounterView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

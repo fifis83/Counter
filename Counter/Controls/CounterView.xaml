@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:counter="clr-namespace:Counter"
+             x:Class="Counter.Controls.CounterView">
+    <Border Stroke="LightCyan" StrokeThickness="4" MaximumWidthRequest="200" MaximumHeightRequest="250" BackgroundColor="{Binding BackgroundColor}">
+        <VerticalStackLayout>
+            <Label Margin="2"
+                   x:Name="NameLbl"
+                   Text="{Binding Name}"
+                   FontSize="Small"
+                   TextColor="#0c0a1f"
+                   TextDecorations="Underline"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+            <Label Margin="10"
+             
+                   Text="{Binding CurValue}"
+                   FontSize="Large"
+                   TextColor="#0f001e"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+            <Slider 
+                        ValueChanged="Slider_Slided"
+                        DragCompletedCommand="{Binding BindingContext.SaveCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                        />
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <ImageButton Source="plus.png"
+                             CornerRadius="50"
+                             x:Name="PlusBtn"
+                             Clicked="PlusBtn_Clicked"
+                             HeightRequest="50" Margin="5"/>
+                <ImageButton x:Name="ResetBtn"
+                             CornerRadius="50"
+                             Source="home.png"
+                             Clicked="ResetBtn_Clicked"
+                            HeightRequest="50" Margin="5"/>
+                <ImageButton CornerRadius="50"
+                             x:Name="MinusBtn"
+                             Source="minus.png"
+                             Clicked="MinusBtn_Clicked"
+                            HeightRequest="50" Margin="5"/>
+            </HorizontalStackLayout>
+            <ImageButton Source="delete.ico"
+                         Command="{Binding BindingContext.DeleteCounterCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                         CommandParameter="{Binding Source={x:Reference NameLbl}, Path=Text}"
+                         />
+        </VerticalStackLayout>
+    </Border>
+</ContentView>
